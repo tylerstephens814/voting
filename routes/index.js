@@ -13,6 +13,14 @@ router.param('candidate', function(req, res, next, id) {
   });
 });
 
+router.get('/', function(req, res){
+  res.sendFile('voter.html', {root: 'public'})
+});
+
+router.get('/admin', function(req, res){
+  res.sendFile('admin.html', {root: 'public'})
+});
+
 router.get('/voting/:candidate',function(req,res) {
   res.json(req.candidate);
 });
