@@ -1,26 +1,56 @@
+<!DOCTYPE html>
 <html>
-<head>
-<title>Comments</title>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-  <script src="javascripts/app.js"></script>
-</head>
-<body  ng-app="voting" ng-controller="MainCtrl">
-<div style="margin-left: 5em;">
+	<head>
+		<title>Comments</title>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+		<script src="javascripts/app.js"></script>
+	</head>
+	<body  ng-app="voting" ng-controller="MainCtrl">
+		<nav class="navbar navbar-expand-md navbar-dark">
+			<a class="navbar-brand" href="#">Midterm Practice</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link" href="/admin">Admin</a>
+					<a class="nav-item nav-link" href="/">Voter</a>
+				</div>
+			</div>
+		</nav>
+		<div class="container  py-5">
+			<h1> Administrative Interface </h1>
+			<hr>
+			<div class="row">
+				<div class="col-6">
+					<form class="form-group" ng-submit="addCandidate()">
+						<input class="form-control" type="text" ng-model="formContent" placeholder="Candidate name"></input>
+						<button class="btn btn-primary mt-3" type="submit">Add Candidate</button>
+					</form>
+				</div>
+				<div class="col-6">
+					<div class="card">
+						<div class="card-header">
+							<h3>Current Candidates</h3>
+						</div>
+						<div class="card-body">
+							<div ng-repeat="candidate in candidates | orderBy:['-votes','Name']">
+								<span class="glyphicon glyphicon-remove" ng-click="delete(candidate)">X</span>
+								{{candidate.Name}} - votes {{candidate.votes}}
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
 
-<a href="/"><button>Voter</button></a>
-
-<h1> Administrative Interface </h1>
-<form ng-submit="addCandidate()">
-  <input type="text" ng-model="formContent"></input>
-    <button type="submit">Add Candidate</button>
-</form>
-
-<h1>Current Candidates</h1>
-<div ng-repeat="candidate in candidates | orderBy:['-votes','Name']">
-<span class="glyphicon glyphicon-remove" ng-click="delete(candidate)"></span>
-  {{candidate.Name}} - votes {{candidate.votes}}
-</div>
-</body>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	</body>
+	
 </html>
 

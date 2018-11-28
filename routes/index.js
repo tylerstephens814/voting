@@ -3,6 +3,15 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Voting = mongoose.model('Voting');
 
+router.get('/', function(req, res){
+  res.sendFile('voter.html', {root: 'public'})
+});
+
+router.get('/admin', function(req, res){
+  res.sendFile('admin.html', {root: 'public'})
+});
+
+
 router.param('candidate', function(req, res, next, id) {
   var query = Voting.findById(id);
   query.exec(function (err, candidate){
@@ -13,17 +22,11 @@ router.param('candidate', function(req, res, next, id) {
   });
 });
 
-router.get('/', function(req, res){
-  res.sendFile('voter.html', {root: 'public'})
-});
-
-router.get('/admin', function(req, res){
-  res.sendFile('admin.html', {root: 'public'})
-});
 
 router.get('/voting/:candidate',function(req,res) {
   res.json(req.candidate);
 });
+
 
 router.put('/voting/:candidate/upvote', function(req, res, next) {
   console.log("Put Route"+req.candidate.Name);
@@ -33,10 +36,12 @@ router.put('/voting/:candidate/upvote', function(req, res, next) {
   });
 });
 
+
 router.delete('/voting/:candidate',function(req,res) {
   req.candidate.remove();
   res.sendStatus(200);
 });
+
 
 router.get('/voting', function(req, res, next) {
   console.log("Get Route");
@@ -47,6 +52,7 @@ router.get('/voting', function(req, res, next) {
   });
   console.log("returningGet Route");
 });
+
 
 router.post('/voting', function(req, res, next) {
   console.log("Post Route");
